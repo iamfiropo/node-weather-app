@@ -14,7 +14,7 @@ const forecast = (latitude, longitude, callback) => {
     },
     (error, { body }) => {
       const { temperature, precipProbability } = body.currently;
-      const { summary } = body.daily.data[0];
+      const { summary, temperatureHigh, temperatureLow } = body.daily.data[0];
       if (error) {
         callback("Unable to connect to weather service!");
       } else if (body.error) {
@@ -22,7 +22,7 @@ const forecast = (latitude, longitude, callback) => {
       } else {
         callback(
           undefined,
-          `${summary} It is currently ${temperature} degree out. There is a ${precipProbability}% chance of rain`
+          `${summary} It is currently ${temperature} degree out. The high today is ${temperatureHigh} with a low of ${temperatureLow}. There is a ${precipProbability}% chance of rain`
         );
       }
     }
